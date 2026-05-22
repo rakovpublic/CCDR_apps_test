@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Cached raw data downloads
+data_cache/
+!data_cache/.gitkeep
+
+# Generated reports
+reports/*.json
+reports/*.html
+reports/*.md
+!reports/.gitkeep
