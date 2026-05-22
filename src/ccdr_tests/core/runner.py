@@ -82,4 +82,4 @@ def write_lock_files(spec_dir: Path) -> None:
     spec_dir.mkdir(parents=True, exist_ok=True)
     for pid, (pred, _) in load_all().items():
         h = hashlib.sha256(pred.decision_rule.encode("utf-8")).hexdigest()
-        (spec_dir / f"{pid}.lock").write_text(h + "\n")
+        (spec_dir / f"{pid}.lock").write_text(h + "\n", encoding="utf-8")
