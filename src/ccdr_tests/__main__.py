@@ -58,9 +58,11 @@ def main(argv: list | None = None) -> int:
             "predictions": predictions,
             "results": [r.to_dict() for r in results],
         }
-        (reports_dir / "machine_readable.json").write_text(json.dumps(machine, indent=2, default=str))
-        (reports_dir / "summary.md").write_text(render_summary(results, predictions))
-        (reports_dir / "full_report.html").write_text(render_html(results, predictions))
+        (reports_dir / "machine_readable.json").write_text(
+            json.dumps(machine, indent=2, default=str), encoding="utf-8"
+        )
+        (reports_dir / "summary.md").write_text(render_summary(results, predictions), encoding="utf-8")
+        (reports_dir / "full_report.html").write_text(render_html(results, predictions), encoding="utf-8")
         print(f"wrote {reports_dir}/summary.md, full_report.html, machine_readable.json")
         return 0
 

@@ -30,7 +30,7 @@ class DataCache:
         self._index: dict = {}
         if self._index_path.exists():
             try:
-                self._index = json.loads(self._index_path.read_text())
+                self._index = json.loads(self._index_path.read_text(encoding="utf-8"))
             except Exception:
                 self._index = {}
 
@@ -55,9 +55,9 @@ class DataCache:
         data = r.content
         p.write_bytes(data)
         checksum = hashlib.sha256(data).hexdigest()
-        (p.with_suffix(p.suffix + ".sha256")).write_text(checksum)
+        (p.with_suffix(p.suffix + ".sha256")).write_text(checksum, encoding="utf-8")
         self._index[url] = {"path": str(p.relative_to(self.root)), "sha256": checksum, "n_bytes": len(data)}
-        self._index_path.write_text(json.dumps(self._index, indent=2, sort_keys=True))
+        self._index_path.write_text(json.dumps(self._index, indent=2, sort_keys=True), encoding="utf-8")
         return data
 
     def get_text(self, url: str, encoding: str = "utf-8", **kw) -> str:
